@@ -99,9 +99,11 @@ It covers:
 ## What's Included
 
 <details>
-<summary><strong>10 agents, 21 skills, 17 rules, 7 hooks</strong> (click to expand)</summary>
+<summary><strong>25 agents, 28 skills, 18 rules, 7 hooks</strong> (click to expand)</summary>
 
 ### Agents (`.claude/agents/`)
+
+#### Original Agents (Teaching & General)
 
 | Agent | What It Does |
 |-------|-------------|
@@ -116,7 +118,29 @@ It covers:
 | `verifier` | End-to-end task completion verification |
 | `domain-reviewer` | **Template** for your field-specific substance reviewer |
 
+#### Academic Writing Pipeline Agents (NEW)
+
+| Agent | Model | Role | What It Does |
+|-------|-------|------|-------------|
+| `narrative-reviewer` | sonnet | Critic | Argumentative flow, section transitions, "so what" clarity |
+| `stata-reviewer` | sonnet | Critic | Stata code conventions, clustering, file naming |
+| `table-auditor` | sonnet | Critic | Table formatting, number verification against source CSV |
+| `bib-checker` | haiku | Critic | Citation key cross-referencing |
+| `bib-fixer` | sonnet | Fixer | Applies bib-checker findings to `.bib` files |
+| `manuscript-critic` | sonnet | Critic | Audits `.tex` edits — rejects changes the user didn't request |
+| `mccloskey-critic` | sonnet | Critic | McCloskey *Economical Writing* scoring (100-point rubric, per-violation) |
+| `mccloskey-fixer` | sonnet | Fixer | Generates prose revision suggestions for McCloskey violations |
+| `compressor-critic` | sonnet | Critic | Section word count compliance against journal targets |
+| `compressor-fixer` | sonnet | Fixer | Compresses prose to meet word count targets without losing information |
+| `organizer` | sonnet | Fixer | Reorders paragraphs, fixes section boundaries, splits/merges |
+| `consolidator-fixer` | opus | Fixer | Cherry-picks additions from source documents ("yes, and you need this") |
+| `consolidator-critic` | sonnet | Critic | Skeptical gatekeeper for consolidator proposals ("do we need this?") |
+| `lit-synthesizer` | sonnet | Critic | Rates papers by relevance, organizes by subtopic, eliminates bloat |
+| `lit-filter` | sonnet | Critic | Paper inclusion value, redundancy filtering |
+
 ### Skills (`.claude/skills/`)
+
+#### Original Skills (Teaching & General)
 
 | Skill | What It Does |
 |-------|-------------|
@@ -141,6 +165,18 @@ It covers:
 | `/data-analysis` | End-to-end R analysis with publication-ready output |
 | `/learn` | Extract non-obvious discoveries into persistent skills |
 | `/context-status` | Show session health and context usage |
+
+#### Academic Writing Pipeline Skills (NEW)
+
+| Skill | Stage | What It Does | When to Use |
+|-------|-------|-------------|-------------|
+| `/draft-slop-fixer` | 1 | Clean up rough drafts — resolve `(CITE)` markers, reword copy-paste chunks, fill TODOs | First pass on any draft |
+| `/split-pdf` | — | Download, split PDFs into 4-page chunks, deep-read with structured notes | Reading any academic paper |
+| `/lit-filter` | — | Organize, critique inclusion value, filter redundancy across paper notes | After papers are read |
+| `/lit-synthesizer` | — | Rate papers by relevance, organize by subtopic, condense into narrative | Building lit review |
+| `/own-writing-check` | — | Audit `.tex` changes — flag any edit the user didn't request | After touching manuscript files |
+| `/mccloskey-prose-edit` | 7 | McCloskey prose audit: critic→fixer→critic adversarial loop (max 2 rounds) | After content is final |
+| `/consolidate` | 5 | Cherry-pick additions from source docs. Adversarial: fixer proposes, critic evaluates | When merging contributions |
 
 ### Research Workflow
 
