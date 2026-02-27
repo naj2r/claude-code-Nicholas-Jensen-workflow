@@ -12,6 +12,8 @@ allowed-tools: Read, Write, Edit, Glob, Task
 
 **Exception:** The user says "skip the changelog," "skip documentation," or "no logging" for a specific task or set of tasks.
 
+**No recursion:** The stenographer NEVER triggers on its own completion. When a "Stenographer: ..." TODO is marked completed, do NOT add another stenographer TODO. The cycle is: real task → stenographer → next real task. Never: stenographer → stenographer.
+
 ## Protocol
 
 1. **Identify the session log.** Check `quality_reports/session_logs/` for today's log. If none exists, create one: `quality_reports/session_logs/YYYY-MM-DD_description.md`

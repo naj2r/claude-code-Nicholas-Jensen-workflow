@@ -42,6 +42,10 @@ Append one entry to the active session log under a `## Stenographer Record` sect
   - Output: [pass/fail/N warnings]
 ```
 
+## No Recursion
+
+**The stenographer never documents itself.** When a "Stenographer: ..." TODO is completed, it does NOT trigger another stenographer entry. The loop is: real task → stenographer → next real task. Never: stenographer → stenographer.
+
 ## Rules
 
 - **3-5 lines per entry.** Shorter is better.
