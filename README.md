@@ -99,7 +99,7 @@ It covers:
 ## What's Included
 
 <details>
-<summary><strong>25 agents, 28 skills, 18 rules, 7 hooks</strong> (click to expand)</summary>
+<summary><strong>27 agents, 30 skills, 18 rules, 7 hooks</strong> (click to expand)</summary>
 
 ### Agents (`.claude/agents/`)
 
@@ -137,6 +137,13 @@ It covers:
 | `consolidator-critic` | sonnet | Critic | Skeptical gatekeeper for consolidator proposals ("do we need this?") |
 | `lit-synthesizer` | sonnet | Critic | Rates papers by relevance, organizes by subtopic, eliminates bloat |
 | `lit-filter` | sonnet | Critic | Paper inclusion value, redundancy filtering |
+
+#### Background Automation Agents (NEW)
+
+| Agent | Model | Role | What It Does |
+|-------|-------|------|-------------|
+| `stenographer` | haiku | Logger | Raw action log after every TODO — files, commands, pass/fail |
+| `codevolution` | sonnet | Sync | Propagates new/updated agents, skills, rules to template repo |
 
 ### Skills (`.claude/skills/`)
 
@@ -177,6 +184,8 @@ It covers:
 | `/own-writing-check` | — | Audit `.tex` changes — flag any edit the user didn't request | After touching manuscript files |
 | `/mccloskey-prose-edit` | 7 | McCloskey prose audit: critic→fixer→critic adversarial loop (max 2 rounds) | After content is final |
 | `/consolidate` | 5 | Cherry-pick additions from source docs. Adversarial: fixer proposes, critic evaluates | When merging contributions |
+| `/stenographer` | — | Raw action log (haiku) — fires after every TODO completion | Automatic (background) |
+| `/codevolution` | — | Infrastructure sync to template repo — fires after `.claude/` file changes | Automatic (background) |
 
 ### Research Workflow
 
